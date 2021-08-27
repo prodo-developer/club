@@ -5,8 +5,8 @@
 ### 🔑 10장 Spring Boot와 Spring Security 연동
 - [X] 10.1 스프링 시큐리티를 이용하는 프로젝트 생성
 - [X] 10.2 스프링 시큐리티 커스터마이징
-- [ ] 10.3 프로젝트를 위한 JPA 처리
-- [ ] 10.4 시큐리티를 위한 UserDetailsService
+- [X] 10.3 프로젝트를 위한 JPA 처리
+- [X] 10.4 시큐리티를 위한 UserDetailsService
 - [ ] 10.5 Thymeleaf/Controller에서 사용자 정보 출력하기
 
 ### 🔑 11장 스프링 시큐리티 소셜 로그인 처리
