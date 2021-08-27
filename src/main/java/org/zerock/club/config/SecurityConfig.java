@@ -35,13 +35,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();  // csrf 비활성화
         http.logout();          // 로그아웃 주의할점은 CSRF 사용시 POST방식으로만 로그아웃 처리 가능
     }
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        // id:user1, pw:1111
-        auth.inMemoryAuthentication().withUser("user1")
-                .password("$2a$10$bNHWMFbbSPGDmx.5.374SOoqOydpPjFL7VPlbKzb7LkzlOtodaigO")
-                .roles("USER");
-
-    }
+    /**
+     * ClubUserDetailService가 Bean으로 등록되면 스프링 시큐리티에서 UserDetailsServcie로 인식하기 때문에
+     * 기존에 임시로 코드로 직접 설정한 configure(AuthenticationManagerBuilder auth) 부분을 사용하지 않도록 수정
+     * @param auth
+     * @throws Exception
+     */
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//        // id:user1, pw:1111
+//        auth.inMemoryAuthentication().withUser("user1")
+//                .password("$2a$10$bNHWMFbbSPGDmx.5.374SOoqOydpPjFL7VPlbKzb7LkzlOtodaigO")
+//                .roles("USER");
+//
+//    }
 }
