@@ -3,11 +3,11 @@ package org.zerock.club.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.zerock.club.security.handler.ClubLoginSuccessHandler;
 
 @Configuration
 @Slf4j
@@ -34,8 +34,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin();       // 인가/인증에 문제시 로그인 화면
         http.csrf().disable();  // csrf 비활성화
 
-        http.oauth2Login();     // oauth2 로그인
-        http.logout();          // 로그아웃 주의할점은 CSRF 사용시 POST방식으로만 로그아웃 처리 가능
+        http.oauth2Login().successHandler(successHandler());
+//        http.oauth2Login();     // oauth2 로그인
+//        http.logout();          // 로그아웃 주의할점은 CSRF 사용시 POST방식으로만 로그아웃 처리 가능
+    }
+
+    @Bean
+    public ClubLoginSuccessHandler successHandler() {
+        return new ClubLoginSuccessHandler();
     }
 
     /**
