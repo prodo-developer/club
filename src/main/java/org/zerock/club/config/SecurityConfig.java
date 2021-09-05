@@ -15,6 +15,7 @@ import org.zerock.club.security.filter.ApiLoginFilter;
 import org.zerock.club.security.handler.ApiLoginFailHandler;
 import org.zerock.club.security.handler.ClubLoginSuccessHandler;
 import org.zerock.club.security.service.ClubUserDetailService;
+import org.zerock.club.security.util.JWTUtil;
 
 @Configuration
 @Slf4j
@@ -59,13 +60,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public ApiLoginFilter apiLoginFilter() throws Exception {
-        ApiLoginFilter apiLoginFilter = new ApiLoginFilter("/api/login");
+        ApiLoginFilter apiLoginFilter = new ApiLoginFilter("/api/login", jwtUtil());
         apiLoginFilter.setAuthenticationManager(authenticationManager());
 
         apiLoginFilter
                 .setAuthenticationFailureHandler(new ApiLoginFailHandler());
 
         return apiLoginFilter;
+    }
+
+    @Bean
+    public JWTUtil jwtUtil() {
+        return new JWTUtil();
     }
 
     /**
@@ -75,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public ApiCheckFilter apiCheckFilter() {
-        return new ApiCheckFilter("/notes/**/*");
+        return new ApiCheckFilter("/notes/**/*", jwtUtil());
     }
 
     /**
